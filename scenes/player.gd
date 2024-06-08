@@ -78,5 +78,6 @@ func play_card():
 	var card = $StagedCard.get_children()[0]
 	$StagedCard.remove_child(card)
 	replace_community_card.emit(card)
+	await Utils.short_delay(2)
 	draw_card.emit(self, staged_card_index)
 	end_turn()

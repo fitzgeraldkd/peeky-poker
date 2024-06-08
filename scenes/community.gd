@@ -42,9 +42,11 @@ func replace_card(card: Card, index: int = hovered_index):
 		removed_card.hide_hover_effect()
 		removed_card.position = Vector2(0, 0)
 		add_to_discard.emit(removed_card)
+		await Utils.short_delay()
 	$Cards.add_child(card)
 	$Cards.move_child(card, index)
 	card.position = Vector2((index - 2) * Globals.CARD_SPACING, 0)
+	await Utils.short_delay()
 
 func hide_hover_effects():
 	for card in $Cards.get_children():

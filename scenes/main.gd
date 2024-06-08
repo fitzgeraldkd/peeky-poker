@@ -31,21 +31,23 @@ func reset_game():
 	$Opponent2.reset()
 	$Opponent3.reset()
 
+	var players = [
+		$Player,
+		$Opponent1,
+		$Opponent2,
+		$Opponent3,
+	]
+
 	for n in range(Globals.CARDS_IN_HAND):
-		var card = $Deck.draw_card()
-		card.set_face_up(true)
-		$Player.add_card(card, n)
-		card = $Deck.draw_card()
-		$Opponent1.add_card(card, n)
-		card = $Deck.draw_card()
-		$Opponent2.add_card(card, n)
-		card = $Deck.draw_card()
-		$Opponent3.add_card(card, n)
+		for player in players:
+			draw_card(player, n)
+			await Utils.n_seconds(0.08)
 
 	for n in range(5):
 		var card = $Deck.draw_card()
 		card.set_face_up(true)
 		$Community.replace_card(card, n)
+		await Utils.n_seconds(0.08)
 
 	$Player.start_turn()
 
