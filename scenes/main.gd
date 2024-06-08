@@ -1,5 +1,7 @@
 extends Node2D
 
+var players : Array[Node]
+var current_player : Node
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -25,18 +27,17 @@ func set_positions():
 
 func reset_game():
 	$Deck.reset()
-	$Player.reset()
 	$Community.reset()
-	$Opponent1.reset()
-	$Opponent2.reset()
-	$Opponent3.reset()
-
-	var players = [
+	
+	players = [
 		$Player,
 		$Opponent1,
 		$Opponent2,
 		$Opponent3,
 	]
+
+	for player in players:
+		player.reset()
 
 	for n in range(Globals.CARDS_IN_HAND):
 		for player in players:
@@ -49,6 +50,7 @@ func reset_game():
 		$Community.replace_card(card, n)
 		await Utils.n_seconds(0.08)
 
+	current_player = $Player
 	$Player.start_turn()
 
 func draw_card(player: Node, index: int):
@@ -56,3 +58,10 @@ func draw_card(player: Node, index: int):
 	if player == $Player:
 		card.set_face_up(true)
 	player.add_card(card, index)
+
+func next_turn():
+	var current_index = players.find(current_player)
+	var next_index = (current_index + 1) % players.size()
+	var next_player = players[next_index]
+	current_player = next_player
+	next_player.start_turn()
