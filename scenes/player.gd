@@ -5,6 +5,8 @@ signal next_community_card
 signal prev_community_card
 signal replace_community_card(card)
 signal draw_card(instance, index)
+signal highlight_community
+signal unhighlight_community
 
 
 var is_players_turn = false
@@ -61,9 +63,11 @@ func stage_card():
 	card.hide_hover_effect()
 	card.position = Vector2(0, 0)
 	$StagedCard.add_child(card)
+	highlight_community.emit()
 	is_card_staged = true
 
 func unstage_card():
+	unhighlight_community.emit()
 	var card = $StagedCard.get_children()[0]
 	$StagedCard.remove_child(card)
 	$Hand.add_card(card, staged_card_index)

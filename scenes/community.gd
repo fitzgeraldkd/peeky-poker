@@ -67,3 +67,11 @@ func prev_card():
 
 func play_card(card: Card):
 	replace_card(card)
+
+
+func _on_player_highlight_community():
+	show_hover_effect(0)
+
+
+func _on_player_unhighlight_community():
+	hide_hover_effects()
