@@ -34,8 +34,6 @@ func _ready():
 	$Front.visible = false
 	$Front/Number.frame = VALUE_FRAMES[value]
 	$Front/Suit.frame = SUIT_FRAMES[suit]
-	# print(value, suit)
-	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

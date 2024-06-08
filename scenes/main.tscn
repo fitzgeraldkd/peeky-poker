@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://dj8dujkb2vtja"]
+[gd_scene load_steps=8 format=3 uid="uid://dj8dujkb2vtja"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_q50pm"]
 [ext_resource type="PackedScene" uid="uid://h3mrqp7wop0y" path="res://scenes/deck.tscn" id="2_0memr"]
 [ext_resource type="PackedScene" uid="uid://iwpho8tttu53" path="res://scenes/discard.tscn" id="3_cl3su"]
 [ext_resource type="PackedScene" uid="uid://dffmn5puabga5" path="res://scenes/player.tscn" id="3_uxdi2"]
+[ext_resource type="Script" path="res://scenes/discard.gd" id="4_l20dh"]
 [ext_resource type="PackedScene" uid="uid://dfbdbo5t1imdu" path="res://scenes/opponent.tscn" id="4_yowr4"]
 [ext_resource type="PackedScene" uid="uid://bse1ea4eblvdu" path="res://scenes/community.tscn" id="5_npvl3"]
 
@@ -19,6 +20,7 @@ color = Color(0.267758, 0.566686, 0.423723, 1)
 [node name="Deck" parent="." instance=ExtResource("2_0memr")]
 
 [node name="Discard" parent="." instance=ExtResource("3_cl3su")]
+script = ExtResource("4_l20dh")
 
 [node name="Player" parent="." instance=ExtResource("3_uxdi2")]
 
@@ -31,3 +33,9 @@ vertical = true
 vertical = true
 
 [node name="Community" parent="." instance=ExtResource("5_npvl3")]
+
+[connection signal="draw_card" from="Player" to="." method="draw_card"]
+[connection signal="next_community_card" from="Player" to="Community" method="next_card"]
+[connection signal="prev_community_card" from="Player" to="Community" method="prev_card"]
+[connection signal="replace_community_card" from="Player" to="Community" method="play_card"]
+[connection signal="add_to_discard" from="Community" to="Discard" method="add_to_discard"]

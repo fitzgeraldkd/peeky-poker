@@ -1,6 +1,11 @@
 extends Node2D
 
 signal next_turn
+signal next_community_card
+signal prev_community_card
+signal replace_community_card(card)
+signal draw_card(instance, index)
+
 
 var is_players_turn = false
 var is_card_staged = false
@@ -17,8 +22,14 @@ func _process(_delta):
 		return
 
 	if is_card_staged:
-		if Input.is_action_just_pressed("back"):
+		if Input.is_action_just_pressed("left"):
+			prev_community_card.emit()
+		elif Input.is_action_just_pressed("right"):
+			next_community_card.emit()
+		elif Input.is_action_just_pressed("back"):
 			unstage_card()
+		elif Input.is_action_just_pressed("select"):
+			play_card()
 	else:
 		if Input.is_action_just_pressed("left"):
 			$Hand.prev_card()
@@ -58,3 +69,10 @@ func unstage_card():
 	$Hand.add_card(card, staged_card_index)
 	$Hand.show_hover_effect(staged_card_index)
 	is_card_staged = false
+
+func play_card():
+	var card = $StagedCard.get_children()[0]
+	$StagedCard.remove_child(card)
+	replace_community_card.emit(card)
+	draw_card.emit(self, staged_card_index)
+	end_turn()

@@ -48,3 +48,9 @@ func reset_game():
 		$Community.replace_card(card, n)
 
 	$Player.start_turn()
+
+func draw_card(player: Node, index: int):
+	var card = $Deck.draw_card()
+	if player == $Player:
+		card.set_face_up(true)
+	player.add_card(card, index)

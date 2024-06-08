@@ -1,5 +1,9 @@
 extends Node2D
 
+signal add_to_discard(card)
+
+@export var empty_spot_scene: PackedScene
+
 var hovered_index = 0
 
 
@@ -12,33 +16,54 @@ func _ready():
 func _process(_delta):
 	pass
 
+func _get_position(index: int):
+	var offset = (index - 2) * Globals.CARD_SPACING
+	return Vector2(offset, 0)
+
 func reset():
-	pass
+	for n in $EmptySpots.get_children():
+		$EmptySpots.remove_child(n)
+		n.queue_free()
+
+	for n in $Cards.get_children():
+		$Cards.remove_child(n)
+		n.queue_free()
+
+	for n in range(5):
+		var empty_spot = empty_spot_scene.instantiate()
+		empty_spot.position = _get_position(n)
+		$EmptySpots.add_child(empty_spot)
 
 func replace_card(card: Card, index: int = hovered_index):
-	var removed_card = get_children()[index]
-	if removed_card:
-		remove_child(removed_card)
-	add_child(card)
-	move_child(card, index)
+	var removed_card : Node
+	if index < $Cards.get_children().size():
+		removed_card = $Cards.get_children()[index]
+		$Cards.remove_child(removed_card)
+		removed_card.hide_hover_effect()
+		removed_card.position = Vector2(0, 0)
+		add_to_discard.emit(removed_card)
+	$Cards.add_child(card)
+	$Cards.move_child(card, index)
 	card.position = Vector2((index - 2) * Globals.CARD_SPACING, 0)
-	return removed_card
 
-# func hide_hover_effects():
-# 	for card in $Cards.get_children():
-# 		card.hide_hover_effect()
+func hide_hover_effects():
+	for card in $Cards.get_children():
+		card.hide_hover_effect()
 
-# func show_hover_effect(index: int):
-# 	$Cards.get_children()[hovered_index].hide_hover_effect()
-# 	$Cards.get_children()[index].show_hover_effect()
-# 	hovered_index = index
+func show_hover_effect(index: int):
+	$Cards.get_children()[hovered_index].hide_hover_effect()
+	$Cards.get_children()[index].show_hover_effect()
+	hovered_index = index
 
-# func next_card():
-# 	if hovered_index < 4:
-# 		var new_index = hovered_index + 1
-# 		show_hover_effect(new_index)
+func next_card():
+	if hovered_index < 4:
+		var new_index = hovered_index + 1
+		show_hover_effect(new_index)
 
-# func prev_card():
-# 	if hovered_index > 0:
-# 		var new_index = hovered_index - 1
-# 		show_hover_effect(new_index)
+func prev_card():
+	if hovered_index > 0:
+		var new_index = hovered_index - 1
+		show_hover_effect(new_index)
+
+func play_card(card: Card):
+	replace_card(card)
