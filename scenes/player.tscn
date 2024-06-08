@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://dffmn5puabga5"]
+
+[ext_resource type="PackedScene" uid="uid://duwsvmrhuna1t" path="res://scenes/hand.tscn" id="1_55biu"]
+[ext_resource type="Script" path="res://scenes/player.gd" id="1_yt6yb"]
+
+[node name="Player" type="Node2D"]
+script = ExtResource("1_yt6yb")
+metadata/_edit_group_ = true
+
+[node name="Hand" parent="." instance=ExtResource("1_55biu")]
+
+[node name="StagedCard" type="Node2D" parent="."]
+position = Vector2(0, -72)

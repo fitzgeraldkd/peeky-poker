@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://bse1ea4eblvdu"]
+
+[ext_resource type="Script" path="res://scenes/community.gd" id="1_277dc"]
+[ext_resource type="PackedScene" uid="uid://shvls3hxgw63" path="res://scenes/empty_spot.tscn" id="1_vg1c1"]
+
+[node name="Community" type="Node2D"]
+script = ExtResource("1_277dc")
+metadata/_edit_group_ = true
+
+[node name="EmptySpot" parent="." instance=ExtResource("1_vg1c1")]
+position = Vector2(-144, 0)
+
+[node name="EmptySpot2" parent="." instance=ExtResource("1_vg1c1")]
+position = Vector2(-72, 0)
+
+[node name="EmptySpot3" parent="." instance=ExtResource("1_vg1c1")]
+
+[node name="EmptySpot4" parent="." instance=ExtResource("1_vg1c1")]
+position = Vector2(72, 0)
+
+[node name="EmptySpot5" parent="." instance=ExtResource("1_vg1c1")]
+position = Vector2(144, 0)

@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://shvls3hxgw63"]
+
+[ext_resource type="Texture2D" uid="uid://dksyc8j27a6k" path="res://assets/Cards v2.png" id="1_q7jqo"]
+
+[node name="EmptySpot" type="Node2D"]
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_q7jqo")
+hframes = 5
+vframes = 5

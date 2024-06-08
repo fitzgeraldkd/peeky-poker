@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://iwpho8tttu53"]
+
+[ext_resource type="PackedScene" uid="uid://shvls3hxgw63" path="res://scenes/empty_spot.tscn" id="1_tpm61"]
+
+[node name="Discard" type="Node2D"]
+
+[node name="EmptySpot" parent="." instance=ExtResource("1_tpm61")]
+
+[node name="Cards" type="Node" parent="."]
