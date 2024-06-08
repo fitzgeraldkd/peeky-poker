@@ -1,6 +1,7 @@
 extends Node2D
 
 @export var card_scene: PackedScene
+var discard_node : Node
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -26,6 +27,14 @@ func reset():
 
 func draw_card():
 	var cards = get_children()
+
+	if get_children().size() == 0:
+		cards = discard_node.get_node("Cards").get_children()
+		for card in cards:
+			discard_node.get_node("Cards").remove_child(card)
+			card.set_face_up(false)
+			add_child(card)
+
 	var card = cards[randi() % cards.size()]
 	remove_child(card)
 	return card

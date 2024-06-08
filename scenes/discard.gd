@@ -11,4 +11,4 @@ func _process(_delta):
 	pass
 
 func add_to_discard(card):
-	add_child(card)
+	$Cards.add_child(card)

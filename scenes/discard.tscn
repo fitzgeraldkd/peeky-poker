@@ -3,7 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://shvls3hxgw63" path="res://scenes/empty_spot.tscn" id="1_tpm61"]
 
 [node name="Discard" type="Node2D"]
+metadata/_edit_group_ = true
 
 [node name="EmptySpot" parent="." instance=ExtResource("1_tpm61")]
 
-[node name="Cards" type="Node" parent="."]
+[node name="Cards" type="Node2D" parent="."]

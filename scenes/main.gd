@@ -27,8 +27,9 @@ func set_positions():
 
 func reset_game():
 	$Deck.reset()
+	$Deck.discard_node = $Discard
 	$Community.reset()
-	
+
 	players = [
 		$Player,
 		$Opponent1,
