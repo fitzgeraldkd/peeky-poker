@@ -3,3 +3,4 @@
 .vscode/
 *.wav
 *.wav.import
+builds/
