@@ -52,7 +52,6 @@ func peek_at_hand():
 ### AI
 
 func random(hand, community):
-	print("calling random")
 	var hand_cards = hand.get_node("Cards").get_children()
 	var community_cards = community.get_node("Cards").get_children()
 	return [
@@ -61,7 +60,6 @@ func random(hand, community):
 	]
 
 func instant_gratification(hand, community):
-	print("calling instant_gratification")
 	var hand_values = hand.get_node("Cards").get_children().map(
 		func(card): return card.get_value()
 	)
@@ -72,8 +70,6 @@ func instant_gratification(hand, community):
 	var best_points = 0
 	var combinations = []
 	for hand_index in range(hand_values.size()):
-		print(best_points)
-		print(combinations)
 		for community_index in range(community_values.size()):
 			var new_community = community_values.duplicate()
 			new_community[community_index] =  hand_values[hand_index]
@@ -84,8 +80,6 @@ func instant_gratification(hand, community):
 			else:
 				this_points = Utils.determine_hand_points(new_community)
 
-
-			print("this_points ", this_points)
 			if this_points > best_points:
 				best_points = this_points
 				combinations = [[hand_index, community_index]]
