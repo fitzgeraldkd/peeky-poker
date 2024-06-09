@@ -33,14 +33,14 @@ func _process(_delta):
 			prev_community_card.emit()
 		elif Input.is_action_just_pressed("right"):
 			next_community_card.emit()
-		elif Input.is_action_just_pressed("back"):
+		elif Input.is_action_just_pressed("back") or Input.is_action_just_pressed("down"):
 			unstage_card()
-		elif Input.is_action_just_pressed("select"):
+		elif Input.is_action_just_pressed("select") or Input.is_action_just_pressed("up"):
 			play_card()
 	elif is_hovering_peek:
 		if Input.is_action_just_pressed("left"):
 			unhover_peek()
-		elif Input.is_action_just_pressed("select"):
+		elif Input.is_action_just_pressed("select") or Input.is_action_just_pressed("up"):
 			play_peek()
 	else:
 		if Input.is_action_just_pressed("left"):
@@ -48,7 +48,7 @@ func _process(_delta):
 		elif Input.is_action_just_pressed("right"):
 			if not $Hand.next_card():
 				hover_peek()
-		elif Input.is_action_just_pressed("select"):
+		elif Input.is_action_just_pressed("select") or Input.is_action_just_pressed("up"):
 			stage_card()
 
 func reset():
