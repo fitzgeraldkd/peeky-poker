@@ -23,7 +23,9 @@ Utils="*res://scenes/utils.gd"
 
 [display]
 
-window/size/resizable=false
+window/size/viewport_width=900
+window/size/viewport_height=600
+window/stretch/scale_mode="integer"
 
 [input]
 

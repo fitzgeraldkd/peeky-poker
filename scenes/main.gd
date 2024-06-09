@@ -9,6 +9,7 @@ var consecutive_kickers = 0
 func _ready():
 	set_positions()
 	reset_game()
+	get_tree().get_root().size_changed.connect(set_positions)
 	pass # Replace with function body.
 
 
@@ -19,44 +20,44 @@ func _process(_delta):
 func set_positions():
 	var offset = 64
 	var viewport_size = get_viewport().get_visible_rect().size
-	var turn_indicator_offset = (Globals.CARDS_IN_HAND + 1) * Globals.CARD_SPACING / 2.0
+	var turn_indicator_offset = int((Globals.CARDS_IN_HAND + 1) * Globals.CARD_SPACING / 2.0)
 
-	$Player.position = Vector2(viewport_size[0] / 2, viewport_size[1] - offset)
+	$Player.position = Vector2(int(viewport_size[0] / 2), int(viewport_size[1] - offset))
 	$Player/PointsLabel.anchors_preset = Control.PRESET_CENTER_LEFT
 	$Player/PointsLabel.position += Vector2(
 		-2 * Globals.CARD_SPACING - Globals.CARD_SIZE / 2.0,
 		-64,
 	)
-	$Player/TurnIndicator.position += Vector2(-1 * turn_indicator_offset, 0)
-	$Player/PeekCard.position += Vector2(3.5 * Globals.CARD_SPACING, 0)
+	$Player/TurnIndicator.position = Vector2(-1 * turn_indicator_offset, 0)
+	$Player/PeekCard.position = Vector2(3.5 * Globals.CARD_SPACING, 0)
 
-	$Opponent1.position = Vector2(offset, viewport_size[1] / 2)
+	$Opponent1.position = Vector2(offset, int(viewport_size[1] / 2))
 	$Opponent1/PointsLabel.anchors_preset = Control.PRESET_CENTER_LEFT
 	$Opponent1/PointsLabel.position += Vector2(
 		40,
 		-2 * Globals.CARD_SPACING,
 	)
-	$Opponent1/TurnIndicator.position += Vector2(0, -1 * turn_indicator_offset)
+	$Opponent1/TurnIndicator.position = Vector2(0, -1 * turn_indicator_offset)
 
-	$Opponent2.position = Vector2(viewport_size[0] / 2, offset)
+	$Opponent2.position = Vector2(int(viewport_size[0] / 2), offset)
 	$Opponent2/PointsLabel.anchors_preset = Control.PRESET_CENTER_LEFT
 	$Opponent2/PointsLabel.position += Vector2(
 		-2 * Globals.CARD_SPACING - Globals.CARD_SIZE / 2.0,
 		64,
 	)
-	$Opponent2/TurnIndicator.position += Vector2(turn_indicator_offset, 0)
+	$Opponent2/TurnIndicator.position = Vector2(turn_indicator_offset, 0)
 
-	$Opponent3.position = Vector2(viewport_size[0] - offset, viewport_size[1] / 2)
+	$Opponent3.position = Vector2(int(viewport_size[0] - offset), int(viewport_size[1] / 2))
 	$Opponent3/PointsLabel.anchors_preset = Control.PRESET_CENTER_RIGHT
 	$Opponent3/PointsLabel.position += Vector2(
 		-40,
 		-2 * Globals.CARD_SPACING,
 	)
-	$Opponent3/TurnIndicator.position += Vector2(0, turn_indicator_offset)
+	$Opponent3/TurnIndicator.position = Vector2(0, turn_indicator_offset)
 
-	$Community.position = Vector2(viewport_size[0] / 2, viewport_size[1] / 2)
-	$Deck.position = Vector2(viewport_size[0] / 2 - 250, viewport_size[1] / 2 - 36)
-	$Discard.position = Vector2(viewport_size[0] / 2 - 250, viewport_size[1] / 2 + 36)
+	$Community.position = Vector2(int(viewport_size[0] / 2), int(viewport_size[1] / 2))
+	$Deck.position = Vector2(int(viewport_size[0] / 2 - 250), int(viewport_size[1] / 2 - 36))
+	$Discard.position = Vector2(int(viewport_size[0] / 2 - 250), int(viewport_size[1] / 2 + 36))
 
 	$Community.update_kicker_labels(0)
 
