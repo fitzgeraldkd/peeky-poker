@@ -90,4 +90,7 @@ func is_kicker(cards, card):
 	return true
 
 func get_kicker_penalty(n: int):
+	if Globals.KICKERS_WORTHLESS:
+		return 1 if n == 0 else 0
+
 	return 0.5 ** n

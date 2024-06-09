@@ -35,6 +35,10 @@ func reset():
 		empty_spot.position = _get_position(n)
 		$EmptySpots.add_child(empty_spot)
 
+	if Globals.KICKERS_WORTHLESS:
+		$KickerLabel.visible = false
+		$PenaltyLabel.visible = false
+
 func replace_card(card: Card, index: int = hovered_index):
 	var removed_card : Node
 	var hand
