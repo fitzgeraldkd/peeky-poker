@@ -1,0 +1,100 @@
+[gd_scene load_steps=15 format=3 uid="uid://hs31voassa00"]
+
+[ext_resource type="Texture2D" uid="uid://dk1lkfkem3w0a" path="res://assets/Turn Indicator - Copy.png" id="1_43pi5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sd6gr"]
+atlas = ExtResource("1_43pi5")
+region = Rect2(32, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kbkkm"]
+atlas = ExtResource("1_43pi5")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1qi21"]
+atlas = ExtResource("1_43pi5")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ul35n"]
+atlas = ExtResource("1_43pi5")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ilbvf"]
+atlas = ExtResource("1_43pi5")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7wfg0"]
+atlas = ExtResource("1_43pi5")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yo08p"]
+atlas = ExtResource("1_43pi5")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rcqoq"]
+atlas = ExtResource("1_43pi5")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_imasv"]
+atlas = ExtResource("1_43pi5")
+region = Rect2(16, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_swcxh"]
+atlas = ExtResource("1_43pi5")
+region = Rect2(32, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8syh2"]
+atlas = ExtResource("1_43pi5")
+region = Rect2(0, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dhtmn"]
+atlas = ExtResource("1_43pi5")
+region = Rect2(16, 48, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hj1cy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sd6gr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kbkkm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1qi21")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ul35n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ilbvf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7wfg0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yo08p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rcqoq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_imasv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_swcxh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8syh2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dhtmn")
+}],
+"loop": true,
+"name": &"default",
+"speed": 15.0
+}]
+
+[node name="TurnIndicator" type="AnimatedSprite2D"]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_hj1cy")
+frame_progress = 0.893244

@@ -23,6 +23,7 @@ func add_card(card: Card, index: int):
 	$Hand.add_card(card, index)
 
 func start_turn():
+	$TurnIndicator.play()
 	await Utils.n_seconds(1.5)
 	var card_index = randi() % Globals.CARDS_IN_HAND
 	var community_index = randi() % 5
@@ -39,4 +40,5 @@ func play_card(card_index: int, community_index: int):
 
 
 func end_turn():
+	$TurnIndicator.stop()
 	next_turn.emit()

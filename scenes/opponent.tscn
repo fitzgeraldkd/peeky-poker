@@ -1,13 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://dfbdbo5t1imdu"]
+[gd_scene load_steps=4 format=3 uid="uid://dfbdbo5t1imdu"]
 
 [ext_resource type="Script" path="res://scenes/opponent.gd" id="1_7mjti"]
 [ext_resource type="PackedScene" uid="uid://duwsvmrhuna1t" path="res://scenes/hand.tscn" id="1_7oihb"]
+[ext_resource type="PackedScene" uid="uid://hs31voassa00" path="res://scenes/turn_indicator.tscn" id="3_sd13t"]
 
 [node name="Opponent" type="Node2D"]
 script = ExtResource("1_7mjti")
 metadata/_edit_group_ = true
 
 [node name="Hand" parent="." instance=ExtResource("1_7oihb")]
+
+[node name="TurnIndicator" parent="." instance=ExtResource("3_sd13t")]
 
 [node name="PointsLabel" type="Label" parent="."]
 offset_right = 38.0

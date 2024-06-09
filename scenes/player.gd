@@ -49,11 +49,13 @@ func add_card(card: Card, index: int):
 func start_turn():
 	is_players_turn = true
 	is_card_staged = false
+	$TurnIndicator.play()
 	$Hand.show_hover_effect(0)
 
 func end_turn():
 	is_players_turn = false
 	is_card_staged = false
+	$TurnIndicator.stop()
 	$Hand.hide_hover_effects()
 	next_turn.emit()
 

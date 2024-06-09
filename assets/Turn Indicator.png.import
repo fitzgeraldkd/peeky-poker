@@ -1,0 +1,26 @@
+[remap]
+
+importer="2d_array_texture"
+type="CompressedTexture2DArray"
+uid="uid://ca7nxm06ugbs1"
+path="res://.godot/imported/Turn Indicator.png-3f5ecfababbd9ce6e8528a8604974562.ctexarray"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://assets/Turn Indicator.png"
+dest_files=["res://.godot/imported/Turn Indicator.png-3f5ecfababbd9ce6e8528a8604974562.ctexarray"]
+
+[params]
+
+compress/mode=0
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/channel_pack=0
+mipmaps/generate=false
+mipmaps/limit=-1
+slices/horizontal=3
+slices/vertical=3
