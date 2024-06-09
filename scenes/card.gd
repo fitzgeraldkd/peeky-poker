@@ -54,3 +54,9 @@ func show_hover_effect():
 func hide_hover_effect():
 	$HoverEffect.visible = false
 	$HoverEffect.stop()
+
+func get_value():
+	return {
+		"value": value,
+		"suit": suit,
+	}

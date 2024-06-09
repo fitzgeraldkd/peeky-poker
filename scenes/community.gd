@@ -46,6 +46,8 @@ func replace_card(card: Card, index: int = hovered_index):
 	$Cards.add_child(card)
 	$Cards.move_child(card, index)
 	card.position = Vector2((index - 2) * Globals.CARD_SPACING, 0)
+	if $Cards.get_children().size() == 5:
+		_determine_hand()
 	await Utils.short_delay()
 
 func hide_hover_effects():
@@ -77,3 +79,9 @@ func _on_player_highlight_community():
 
 func _on_player_unhighlight_community():
 	hide_hover_effects()
+
+func _determine_hand():
+	var cards = $Cards.get_children().map(func(card): return card.get_value())
+	var hand = Utils.determine_hand(cards)
+	var label = Globals.HAND_NAMES[hand]
+	$Label.text = label
