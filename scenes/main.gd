@@ -75,6 +75,8 @@ func reset_game():
 	for player in players:
 		points[player] = 0
 		player.reset()
+		if player != $Player:
+			player.community_node = $Community
 
 	for n in range(Globals.CARDS_IN_HAND):
 		for player in players:

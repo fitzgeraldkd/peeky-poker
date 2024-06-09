@@ -68,6 +68,10 @@ func determine_hand(cards):
 
 	return Globals.HANDS.HIGH_CARD
 
+func determine_hand_points(cards):
+	var hand = determine_hand(cards)
+	return Globals.HAND_POINTS[hand]
+
 func is_kicker(cards, card):
 	var card_values = cards.map(func(c): return c.value)
 	if card_values.count(card.value) > 1:

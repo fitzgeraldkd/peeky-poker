@@ -5,11 +5,14 @@ signal replace_community_card(card, player, index)
 signal draw_card(instance, index)
 
 @export var vertical = false
+var ai_function : Callable
+var community_node
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$Hand.vertical = vertical
-	pass # Replace with function body.
+	ai_function = Callable(self, "instant_gratification")
+	# ai_function = Callable(self, "random")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -25,9 +28,8 @@ func add_card(card: Card, index: int):
 func start_turn():
 	$TurnIndicator.play()
 	await Utils.n_seconds(1.5)
-	var card_index = randi() % Globals.CARDS_IN_HAND
-	var community_index = randi() % 5
-	play_card(card_index, community_index)
+	var indeces = ai_function.call($Hand, community_node)
+	play_card(indeces[0], indeces[1])
 
 func play_card(card_index: int, community_index: int):
 	var card = $Hand.take_card(card_index)
@@ -46,3 +48,48 @@ func end_turn():
 
 func peek_at_hand():
 	$Hand.peek()
+
+### AI
+
+func random(hand, community):
+	print("calling random")
+	var hand_cards = hand.get_node("Cards").get_children()
+	var community_cards = community.get_node("Cards").get_children()
+	return [
+		randi() % hand_cards.size(),
+		randi() % community_cards.size(),
+	]
+
+func instant_gratification(hand, community):
+	print("calling instant_gratification")
+	var hand_values = hand.get_node("Cards").get_children().map(
+		func(card): return card.get_value()
+	)
+	var community_values = community.get_node("Cards").get_children().map(
+		func(card): return card.get_value()
+	)
+
+	var best_points = 0
+	var combinations = []
+	for hand_index in range(hand_values.size()):
+		print(best_points)
+		print(combinations)
+		for community_index in range(community_values.size()):
+			var new_community = community_values.duplicate()
+			new_community[community_index] =  hand_values[hand_index]
+
+			var this_points : int
+			if Utils.is_kicker(new_community, hand_values[hand_index]):
+				this_points = 0
+			else:
+				this_points = Utils.determine_hand_points(new_community)
+
+
+			print("this_points ", this_points)
+			if this_points > best_points:
+				best_points = this_points
+				combinations = [[hand_index, community_index]]
+			elif this_points == best_points:
+				combinations.append([hand_index, community_index])
+
+	return combinations[randi() % combinations.size()]
