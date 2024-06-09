@@ -1,7 +1,8 @@
 extends Node
 
 const CARDS_IN_HAND = 5
-const CARD_SPACING = 72
+const CARD_SIZE = 64
+const CARD_SPACING = CARD_SIZE + 8
 const SHORT_DELAY = 0.3
 
 enum HANDS {
@@ -28,4 +29,17 @@ const HAND_NAMES = {
     HANDS.TWO_PAIR: "Two Pair",
     HANDS.PAIR: "Pair",
     HANDS.HIGH_CARD: "High Card",
+}
+
+const HAND_POINTS = {
+    HANDS.ROYAL_FLUSH: 2000,
+    HANDS.STRAIGHT_FLUSH: 800,
+    HANDS.FOUR_OF_A_KIND: 700,
+    HANDS.FULL_HOUSE: 600,
+    HANDS.FLUSH: 500,
+    HANDS.STRAIGHT: 400,
+    HANDS.THREE_OF_A_KIND: 300,
+    HANDS.TWO_PAIR: 200,
+    HANDS.PAIR: 100,
+    HANDS.HIGH_CARD: 0,
 }

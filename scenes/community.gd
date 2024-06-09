@@ -1,6 +1,7 @@
 extends Node2D
 
 signal add_to_discard(card)
+signal add_points(player, hand)
 
 @export var empty_spot_scene: PackedScene
 
@@ -36,6 +37,7 @@ func reset():
 
 func replace_card(card: Card, index: int = hovered_index):
 	var removed_card : Node
+	var hand
 	if index < $Cards.get_children().size():
 		removed_card = $Cards.get_children()[index]
 		$Cards.remove_child(removed_card)
@@ -47,8 +49,9 @@ func replace_card(card: Card, index: int = hovered_index):
 	$Cards.move_child(card, index)
 	card.position = Vector2((index - 2) * Globals.CARD_SPACING, 0)
 	if $Cards.get_children().size() == 5:
-		_determine_hand()
+		hand = _determine_hand()
 	await Utils.short_delay()
+	return hand
 
 func hide_hover_effects():
 	for card in $Cards.get_children():
@@ -69,8 +72,9 @@ func prev_card():
 		var new_index = hovered_index - 1
 		show_hover_effect(new_index)
 
-func play_card(card: Card):
-	replace_card(card)
+func play_card(card: Card, player: Node, index: int = hovered_index):
+	var hand = await replace_card(card, index)
+	add_points.emit(player, hand)
 
 
 func _on_player_highlight_community():
@@ -85,3 +89,4 @@ func _determine_hand():
 	var hand = Utils.determine_hand(cards)
 	var label = Globals.HAND_NAMES[hand]
 	$Label.text = label
+	return hand

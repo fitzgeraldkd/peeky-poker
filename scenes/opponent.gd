@@ -1,7 +1,7 @@
 extends Node2D
 
 signal next_turn
-signal replace_community_card(card, index)
+signal replace_community_card(card, player, index)
 signal draw_card(instance, index)
 
 @export var vertical = false
@@ -31,7 +31,7 @@ func play_card(card_index: int, community_index: int):
 	var card = $Hand.take_card(card_index)
 	card.position = Vector2(0, 0)
 	card.set_face_up(true)
-	replace_community_card.emit(card, community_index)
+	replace_community_card.emit(card, self, community_index)
 	await Utils.short_delay(2)
 	draw_card.emit(self, card_index)
 	end_turn()

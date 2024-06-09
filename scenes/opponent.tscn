@@ -8,3 +8,8 @@ script = ExtResource("1_7mjti")
 metadata/_edit_group_ = true
 
 [node name="Hand" parent="." instance=ExtResource("1_7oihb")]
+
+[node name="PointsLabel" type="Label" parent="."]
+offset_right = 38.0
+offset_bottom = 23.0
+text = "0 pts"

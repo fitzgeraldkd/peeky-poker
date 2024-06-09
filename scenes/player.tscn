@@ -11,3 +11,8 @@ metadata/_edit_group_ = true
 
 [node name="StagedCard" type="Node2D" parent="."]
 position = Vector2(0, -72)
+
+[node name="PointsLabel" type="Label" parent="."]
+offset_right = 38.0
+offset_bottom = 23.0
+text = "0 pts"

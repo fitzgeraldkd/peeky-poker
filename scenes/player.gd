@@ -3,7 +3,7 @@ extends Node2D
 signal next_turn
 signal next_community_card
 signal prev_community_card
-signal replace_community_card(card)
+signal replace_community_card(card, player)
 signal draw_card(instance, index)
 signal highlight_community
 signal unhighlight_community
@@ -77,7 +77,7 @@ func unstage_card():
 func play_card():
 	var card = $StagedCard.get_children()[0]
 	$StagedCard.remove_child(card)
-	replace_community_card.emit(card)
+	replace_community_card.emit(card, self)
 	await Utils.short_delay(2)
 	draw_card.emit(self, staged_card_index)
 	end_turn()
