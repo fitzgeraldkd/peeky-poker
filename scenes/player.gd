@@ -53,6 +53,7 @@ func _process(_delta):
 
 func reset():
 	$Hand.reset()
+	unhover_peek(false)
 
 func add_card(card: Card, index: int):
 	$Hand.add_card(card, index)

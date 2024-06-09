@@ -12,3 +12,8 @@ func _process(_delta):
 
 func add_to_discard(card):
 	$Cards.add_child(card)
+
+func reset():
+	for card in $Cards.get_children():
+		$Cards.remove_child(card)
+		card.queue_free()

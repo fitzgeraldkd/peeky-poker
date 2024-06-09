@@ -72,6 +72,7 @@ func set_positions():
 func reset_game():
 	$Deck.reset()
 	$Deck.discard_node = $Discard
+	$Discard.reset()
 	$Community.reset()
 
 	$HUD/ResultsLabel.text = ""
