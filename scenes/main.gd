@@ -106,8 +106,10 @@ func next_turn():
 
 func _on_community_add_points(player, hand, is_kicker):
 	if is_kicker:
+		$BadPlaySound.play()
 		consecutive_kickers += 1
 	else:
+		$GoodPlaySound.play()
 		consecutive_kickers = 0
 	$Community.update_kicker_labels(consecutive_kickers)
 	var points_to_add = int(Globals.HAND_POINTS[hand] * Utils.get_kicker_penalty(consecutive_kickers))
@@ -116,6 +118,7 @@ func _on_community_add_points(player, hand, is_kicker):
 
 
 func _on_player_peek_at_opponent_hands():
+	$PeekSound.play()
 	$Opponent1.peek_at_hand()
 	$Opponent2.peek_at_hand()
 	$Opponent3.peek_at_hand()

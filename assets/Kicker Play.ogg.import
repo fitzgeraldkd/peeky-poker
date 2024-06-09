@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://388mdkjhvfcg"
+path="res://.godot/imported/Kicker Play.ogg-bce2c5a2e81d31eaa5c2e556e383217b.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/Kicker Play.ogg"
+dest_files=["res://.godot/imported/Kicker Play.ogg-bce2c5a2e81d31eaa5c2e556e383217b.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dj8dujkb2vtja"]
+[gd_scene load_steps=12 format=3 uid="uid://dj8dujkb2vtja"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_q50pm"]
 [ext_resource type="PackedScene" uid="uid://h3mrqp7wop0y" path="res://scenes/deck.tscn" id="2_0memr"]
@@ -8,6 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://dfbdbo5t1imdu" path="res://scenes/opponent.tscn" id="4_yowr4"]
 [ext_resource type="PackedScene" uid="uid://bse1ea4eblvdu" path="res://scenes/community.tscn" id="5_npvl3"]
 [ext_resource type="AudioStream" uid="uid://c45r04fphoe85" path="res://assets/Music.ogg" id="8_vcu2a"]
+[ext_resource type="AudioStream" uid="uid://bu3yni47gsjmy" path="res://assets/Good Play.ogg" id="9_hos1b"]
+[ext_resource type="AudioStream" uid="uid://388mdkjhvfcg" path="res://assets/Kicker Play.ogg" id="10_fwhrt"]
+[ext_resource type="AudioStream" uid="uid://b0t45yn5bpolm" path="res://assets/Peek.ogg" id="11_7nw1w"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_q50pm")
@@ -29,9 +32,22 @@ vertical = true
 
 [node name="Community" parent="." instance=ExtResource("5_npvl3")]
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_vcu2a")
 autoplay = true
+bus = &"Music"
+
+[node name="GoodPlaySound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_hos1b")
+bus = &"Sound Effects"
+
+[node name="BadPlaySound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_fwhrt")
+bus = &"Sound Effects"
+
+[node name="PeekSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_7nw1w")
+bus = &"Sound Effects"
 
 [connection signal="draw_card" from="Player" to="." method="draw_card"]
 [connection signal="highlight_community" from="Player" to="Community" method="_on_player_highlight_community"]
