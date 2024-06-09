@@ -49,6 +49,19 @@ bus = &"Sound Effects"
 stream = ExtResource("11_7nw1w")
 bus = &"Sound Effects"
 
+[node name="HUD" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="ResultsLabel" type="Label" parent="HUD"]
+offset_right = 1.0
+offset_bottom = 45.0
+theme_override_font_sizes/font_size = 32
+horizontal_alignment = 1
+
+[node name="RoundLabel" type="Label" parent="HUD"]
+offset_right = 40.0
+offset_bottom = 23.0
+
 [connection signal="draw_card" from="Player" to="." method="draw_card"]
 [connection signal="highlight_community" from="Player" to="Community" method="_on_player_highlight_community"]
 [connection signal="next_community_card" from="Player" to="Community" method="next_card"]
@@ -56,6 +69,7 @@ bus = &"Sound Effects"
 [connection signal="peek_at_opponent_hands" from="Player" to="." method="_on_player_peek_at_opponent_hands"]
 [connection signal="prev_community_card" from="Player" to="Community" method="prev_card"]
 [connection signal="replace_community_card" from="Player" to="Community" method="play_card"]
+[connection signal="reset_game" from="Player" to="." method="reset_game"]
 [connection signal="unhighlight_community" from="Player" to="Community" method="_on_player_unhighlight_community"]
 [connection signal="draw_card" from="Opponent1" to="." method="draw_card"]
 [connection signal="next_turn" from="Opponent1" to="." method="next_turn"]

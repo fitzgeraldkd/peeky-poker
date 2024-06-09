@@ -4,6 +4,7 @@ var players : Array[Node]
 var current_player : Node
 var points = {}
 var consecutive_kickers = 0
+var current_round = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -15,7 +16,8 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	pass
+	if current_round > Globals.ROUNDS and Input.is_action_just_pressed("reset"):
+		reset_game()
 
 func set_positions():
 	var offset = 64
@@ -59,12 +61,22 @@ func set_positions():
 	$Deck.position = Vector2(int(viewport_size[0] / 2 - 250), int(viewport_size[1] / 2 - 36))
 	$Discard.position = Vector2(int(viewport_size[0] / 2 - 250), int(viewport_size[1] / 2 + 36))
 
+	$HUD/RoundLabel.anchors_preset = Control.PRESET_TOP_RIGHT
+	$HUD/RoundLabel.position += Vector2(-32, 32)
+
+	$HUD/ResultsLabel.anchors_preset = Control.PRESET_CENTER
+	$HUD/ResultsLabel.position += Vector2(0, -80)
+
 	$Community.update_kicker_labels(0)
 
 func reset_game():
 	$Deck.reset()
 	$Deck.discard_node = $Discard
 	$Community.reset()
+
+	$HUD/ResultsLabel.text = ""
+	$HUD/ResultsLabel.visible = false
+	$HUD/RoundLabel.text = ""
 
 	players = [
 		$Player,
@@ -75,6 +87,7 @@ func reset_game():
 
 	for player in players:
 		points[player] = 0
+		player.get_node("PointsLabel").text = str(points[player]) + " pts"
 		player.reset()
 		if player != $Player:
 			player.community_node = $Community
@@ -90,6 +103,8 @@ func reset_game():
 		$Community.replace_card(card, n)
 		await Utils.n_seconds(0.08)
 
+	current_round = 1
+	update_round_label()
 	current_player = $Player
 	$Player.start_turn()
 
@@ -103,8 +118,26 @@ func next_turn():
 	var current_index = players.find(current_player)
 	var next_index = (current_index + 1) % players.size()
 	var next_player = players[next_index]
+	if next_player == $Player:
+		current_round += 1
+		if current_round > Globals.ROUNDS:
+			return await end_game()
+		update_round_label()
 	current_player = next_player
 	next_player.start_turn()
+
+
+func end_game():
+	await Utils.n_seconds(0.2)
+	var player_points = points[$Player]
+	var points_values = points.values()
+	if player_points == points_values.max():
+		if points_values.count(player_points) > 1:
+			update_results_label("Draw!")
+		else:
+			update_results_label("You Win!")
+	else:
+		update_results_label("You Lose!")
 
 
 func _on_community_add_points(player, hand, is_kicker):
@@ -125,3 +158,10 @@ func _on_player_peek_at_opponent_hands():
 	$Opponent1.peek_at_hand()
 	$Opponent2.peek_at_hand()
 	$Opponent3.peek_at_hand()
+
+func update_round_label():
+	$HUD/RoundLabel.text = "Round " + str(current_round) + "/" + str(Globals.ROUNDS)
+
+func update_results_label(text):
+	$HUD/ResultsLabel.text = text
+	$HUD/ResultsLabel.visible = true

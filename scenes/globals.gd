@@ -5,6 +5,7 @@ const CARD_SIZE = 64
 const CARD_SPACING = CARD_SIZE + 8
 const SHORT_DELAY = 0.3
 const KICKERS_WORTHLESS = true
+const ROUNDS = 20
 
 enum HANDS {
     ROYAL_FLUSH,

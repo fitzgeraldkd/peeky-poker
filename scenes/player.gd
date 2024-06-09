@@ -8,7 +8,7 @@ signal draw_card(instance, index)
 signal highlight_community
 signal unhighlight_community
 signal peek_at_opponent_hands
-
+signal reset_game
 
 var is_players_turn = false
 var is_card_staged = false
@@ -24,6 +24,9 @@ func _ready():
 func _process(_delta):
 	if not is_players_turn:
 		return
+
+	if Input.is_action_just_pressed("reset"):
+		reset_game.emit()
 
 	if is_card_staged:
 		if Input.is_action_just_pressed("left"):
