@@ -7,11 +7,13 @@ signal replace_community_card(card, player)
 signal draw_card(instance, index)
 signal highlight_community
 signal unhighlight_community
+signal peek_at_opponent_hands
 
 
 var is_players_turn = false
 var is_card_staged = false
 var staged_card_index : int
+var is_hovering_peek = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -32,11 +34,17 @@ func _process(_delta):
 			unstage_card()
 		elif Input.is_action_just_pressed("select"):
 			play_card()
+	elif is_hovering_peek:
+		if Input.is_action_just_pressed("left"):
+			unhover_peek()
+		elif Input.is_action_just_pressed("select"):
+			play_peek()
 	else:
 		if Input.is_action_just_pressed("left"):
 			$Hand.prev_card()
 		elif Input.is_action_just_pressed("right"):
-			$Hand.next_card()
+			if not $Hand.next_card():
+				hover_peek()
 		elif Input.is_action_just_pressed("select"):
 			stage_card()
 
@@ -49,12 +57,14 @@ func add_card(card: Card, index: int):
 func start_turn():
 	is_players_turn = true
 	is_card_staged = false
+	is_hovering_peek = false
 	$TurnIndicator.play()
 	$Hand.show_hover_effect(0)
 
 func end_turn():
 	is_players_turn = false
 	is_card_staged = false
+	is_hovering_peek = false
 	$TurnIndicator.stop()
 	$Hand.hide_hover_effects()
 	next_turn.emit()
@@ -82,4 +92,22 @@ func play_card():
 	replace_community_card.emit(card, self)
 	await Utils.short_delay(2)
 	draw_card.emit(self, staged_card_index)
+	end_turn()
+
+func hover_peek():
+	is_hovering_peek = true
+	$Hand.hide_hover_effects()
+	$PeekCard/HoverEffect.visible = true
+	$PeekCard/HoverEffect.play()
+
+func unhover_peek(hover_hand: bool = true):
+	is_hovering_peek = false
+	if hover_hand:
+		$Hand.show_hover_effect(Globals.CARDS_IN_HAND - 1)
+	$PeekCard/HoverEffect.visible = false
+	$PeekCard/HoverEffect.stop()
+
+func play_peek():
+	peek_at_opponent_hands.emit()
+	unhover_peek(false)
 	end_turn()

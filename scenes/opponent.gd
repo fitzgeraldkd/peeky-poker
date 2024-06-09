@@ -32,6 +32,7 @@ func start_turn():
 func play_card(card_index: int, community_index: int):
 	var card = $Hand.take_card(card_index)
 	card.position = Vector2(0, 0)
+	card.reset_peek()
 	card.set_face_up(true)
 	replace_community_card.emit(card, self, community_index)
 	await Utils.short_delay(2)
@@ -42,3 +43,6 @@ func play_card(card_index: int, community_index: int):
 func end_turn():
 	$TurnIndicator.stop()
 	next_turn.emit()
+
+func peek_at_hand():
+	$Hand.peek()

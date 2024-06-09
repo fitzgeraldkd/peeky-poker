@@ -60,3 +60,12 @@ func get_value():
 		"value": value,
 		"suit": suit,
 	}
+
+func peek():
+	revealed_to_player = true
+	$Front.modulate = Color(1.0, 1.0, 1.0, 0.5)
+	set_face_up(true)
+
+func reset_peek():
+	revealed_to_player = false
+	$Front.modulate = Color(1.0, 1.0, 1.0, 1.0)

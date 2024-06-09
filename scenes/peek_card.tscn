@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cu4k5pywn0y0l"]
+
+[ext_resource type="Texture2D" uid="uid://cn7mhoy80r6sg" path="res://assets/Peek.png" id="1_625t7"]
+[ext_resource type="PackedScene" uid="uid://dwqwckdd3o8sy" path="res://scenes/hover_effect.tscn" id="1_q6336"]
+
+[node name="PeekCard" type="Node2D"]
+
+[node name="HoverEffect" parent="." instance=ExtResource("1_q6336")]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_625t7")

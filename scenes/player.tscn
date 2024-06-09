@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://dffmn5puabga5"]
+[gd_scene load_steps=5 format=3 uid="uid://dffmn5puabga5"]
 
 [ext_resource type="PackedScene" uid="uid://duwsvmrhuna1t" path="res://scenes/hand.tscn" id="1_55biu"]
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_yt6yb"]
+[ext_resource type="PackedScene" uid="uid://cu4k5pywn0y0l" path="res://scenes/peek_card.tscn" id="3_4cil6"]
 [ext_resource type="PackedScene" uid="uid://hs31voassa00" path="res://scenes/turn_indicator.tscn" id="3_vwpav"]
 
 [node name="Player" type="Node2D"]
@@ -12,6 +13,8 @@ metadata/_edit_group_ = true
 
 [node name="StagedCard" type="Node2D" parent="."]
 position = Vector2(0, -72)
+
+[node name="PeekCard" parent="." instance=ExtResource("3_4cil6")]
 
 [node name="TurnIndicator" parent="." instance=ExtResource("3_vwpav")]
 

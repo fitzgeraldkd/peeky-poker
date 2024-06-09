@@ -1,0 +1,72 @@
+[gd_scene load_steps=11 format=3 uid="uid://dwqwckdd3o8sy"]
+
+[ext_resource type="Texture2D" uid="uid://jsl73fpxosn2" path="res://assets/Hover Effect.png" id="1_mmubw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ioid3"]
+atlas = ExtResource("1_mmubw")
+region = Rect2(0, 0, 72, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sn07b"]
+atlas = ExtResource("1_mmubw")
+region = Rect2(72, 0, 72, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6crnb"]
+atlas = ExtResource("1_mmubw")
+region = Rect2(144, 0, 72, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b060n"]
+atlas = ExtResource("1_mmubw")
+region = Rect2(0, 72, 72, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g0huc"]
+atlas = ExtResource("1_mmubw")
+region = Rect2(72, 72, 72, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4spsp"]
+atlas = ExtResource("1_mmubw")
+region = Rect2(144, 72, 72, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jym5i"]
+atlas = ExtResource("1_mmubw")
+region = Rect2(0, 144, 72, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k3ucl"]
+atlas = ExtResource("1_mmubw")
+region = Rect2(72, 144, 72, 72)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7gdfg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ioid3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sn07b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6crnb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b060n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g0huc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4spsp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jym5i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k3ucl")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="HoverEffect" type="AnimatedSprite2D"]
+visible = false
+sprite_frames = SubResource("SpriteFrames_7gdfg")
+frame_progress = 0.4926

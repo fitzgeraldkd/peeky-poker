@@ -64,8 +64,14 @@ func next_card():
 	if hovered_index < Globals.CARDS_IN_HAND - 1:
 		var new_index = hovered_index + 1
 		show_hover_effect(new_index)
+		return true
+	return false
 
 func prev_card():
 	if hovered_index > 0:
 		var new_index = hovered_index - 1
 		show_hover_effect(new_index)
+
+func peek():
+	for card in $Cards.get_children():
+		card.peek()

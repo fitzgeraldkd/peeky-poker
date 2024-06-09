@@ -27,6 +27,7 @@ func set_positions():
 		-64,
 	)
 	$Player/TurnIndicator.position += Vector2(-1 * turn_indicator_offset, 0)
+	$Player/PeekCard.position += Vector2(3.5 * Globals.CARD_SPACING, 0)
 
 	$Opponent1.position = Vector2(offset, viewport_size[1] / 2)
 	$Opponent1/PointsLabel.anchors_preset = Control.PRESET_CENTER_LEFT
@@ -104,3 +105,9 @@ func _on_community_add_points(player, hand):
 	var points_to_add = Globals.HAND_POINTS[hand]
 	points[player] += points_to_add
 	player.get_node("PointsLabel").text = str(points[player]) + " pts"
+
+
+func _on_player_peek_at_opponent_hands():
+	$Opponent1.peek_at_hand()
+	$Opponent2.peek_at_hand()
+	$Opponent3.peek_at_hand()

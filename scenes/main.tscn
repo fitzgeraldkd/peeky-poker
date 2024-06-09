@@ -37,6 +37,7 @@ autoplay = true
 [connection signal="highlight_community" from="Player" to="Community" method="_on_player_highlight_community"]
 [connection signal="next_community_card" from="Player" to="Community" method="next_card"]
 [connection signal="next_turn" from="Player" to="." method="next_turn"]
+[connection signal="peek_at_opponent_hands" from="Player" to="." method="_on_player_peek_at_opponent_hands"]
 [connection signal="prev_community_card" from="Player" to="Community" method="prev_card"]
 [connection signal="replace_community_card" from="Player" to="Community" method="play_card"]
 [connection signal="unhighlight_community" from="Player" to="Community" method="_on_player_unhighlight_community"]
