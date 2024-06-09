@@ -3,6 +3,7 @@ extends Node2D
 var players : Array[Node]
 var current_player : Node
 var points = {}
+var consecutive_kickers = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -57,6 +58,8 @@ func set_positions():
 	$Deck.position = Vector2(viewport_size[0] / 2 - 250, viewport_size[1] / 2 - 36)
 	$Discard.position = Vector2(viewport_size[0] / 2 - 250, viewport_size[1] / 2 + 36)
 
+	$Community.update_kicker_labels(0)
+
 func reset_game():
 	$Deck.reset()
 	$Deck.discard_node = $Discard
@@ -101,8 +104,13 @@ func next_turn():
 	next_player.start_turn()
 
 
-func _on_community_add_points(player, hand):
-	var points_to_add = Globals.HAND_POINTS[hand]
+func _on_community_add_points(player, hand, is_kicker):
+	if is_kicker:
+		consecutive_kickers += 1
+	else:
+		consecutive_kickers = 0
+	$Community.update_kicker_labels(consecutive_kickers)
+	var points_to_add = int(Globals.HAND_POINTS[hand] * Utils.get_kicker_penalty(consecutive_kickers))
 	points[player] += points_to_add
 	player.get_node("PointsLabel").text = str(points[player]) + " pts"
 

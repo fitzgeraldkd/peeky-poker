@@ -1,7 +1,7 @@
 extends Node2D
 
 signal add_to_discard(card)
-signal add_points(player, hand)
+signal add_points(player, hand, is_kicker)
 
 @export var empty_spot_scene: PackedScene
 
@@ -74,7 +74,9 @@ func prev_card():
 
 func play_card(card: Card, player: Node, index: int = hovered_index):
 	var hand = await replace_card(card, index)
-	add_points.emit(player, hand)
+	var cards = _get_card_values()
+	var is_kicker = Utils.is_kicker(cards, card)
+	add_points.emit(player, hand, is_kicker)
 
 
 func _on_player_highlight_community():
@@ -85,8 +87,16 @@ func _on_player_unhighlight_community():
 	hide_hover_effects()
 
 func _determine_hand():
-	var cards = $Cards.get_children().map(func(card): return card.get_value())
+	var cards = _get_card_values()
 	var hand = Utils.determine_hand(cards)
 	var label = Globals.HAND_NAMES[hand]
-	$Label.text = label
+	$HandLabel.text = label
 	return hand
+
+func _get_card_values():
+	return $Cards.get_children().map(func(card): return card.get_value())
+
+func update_kicker_labels(consecutive_kickers: int):
+	var plural = "" if consecutive_kickers == 1 else "s"
+	$KickerLabel.text = str(consecutive_kickers) + " consecutive kicker play" + plural
+	$PenaltyLabel.text = "Penalty: x" + str(snapped(Utils.get_kicker_penalty(consecutive_kickers), 0.001))

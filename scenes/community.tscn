@@ -12,7 +12,7 @@ metadata/_edit_group_ = true
 
 [node name="Cards" type="Node2D" parent="."]
 
-[node name="Label" type="Label" parent="."]
+[node name="HandLabel" type="Label" parent="."]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -22,6 +22,34 @@ offset_left = -16.5
 offset_top = 48.0
 offset_right = 16.5
 offset_bottom = 71.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+
+[node name="KickerLabel" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -86.0
+offset_right = 20.0
+offset_bottom = -63.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+
+[node name="PenaltyLabel" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -64.0
+offset_right = 20.0
+offset_bottom = -41.0
 grow_horizontal = 2
 grow_vertical = 2
 horizontal_alignment = 1

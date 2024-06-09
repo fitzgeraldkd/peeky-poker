@@ -68,4 +68,22 @@ func determine_hand(cards):
 
 	return Globals.HANDS.HIGH_CARD
 
+func is_kicker(cards, card):
+	var card_values = cards.map(func(c): return c.value)
+	if card_values.count(card.value) > 1:
+		return false
 
+	var hand = determine_hand(cards)
+	if hand in [
+		Globals.HANDS.ROYAL_FLUSH,
+		Globals.HANDS.STRAIGHT_FLUSH,
+		Globals.HANDS.FULL_HOUSE,
+		Globals.HANDS.FLUSH,
+		Globals.HANDS.STRAIGHT,
+	]:
+		return false
+
+	return true
+
+func get_kicker_penalty(n: int):
+	return 0.5 ** n
